@@ -15,8 +15,6 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
-    if os.environ.get("RUN_SUPERUSER_SCRIPT", "false").lower() == "true":
-        import create_superuser
     execute_from_command_line(sys.argv)
 
 
