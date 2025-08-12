@@ -19,23 +19,28 @@ export default function HomePage() {
         transition={{ duration: 0.6 }}
       >
         <motion.div 
-          className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+          className="flex items-center space-x-2 group"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.6 }}
         >
-          Learnify
+          <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+            <span className="text-white font-bold text-xl">L</span>
+          </div>
+          <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent group-hover:from-blue-700 group-hover:to-purple-700 transition-all duration-200">
+            Learnify
+          </span>
         </motion.div>
         <div className="flex gap-4">
           <Link
             to="/login"
-            className="px-4 py-2 text-blue-600 hover:text-blue-700 font-medium transition-colors"
+            className="px-6 py-3 text-blue-600 hover:text-blue-700 font-medium transition-all duration-200 hover:bg-blue-50 rounded-xl border border-transparent hover:border-blue-200"
           >
             Login
           </Link>
           <Link
             to="/register"
-            className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:shadow-lg transition-all duration-200"
+            className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
           >
             Get Started
           </Link>
@@ -79,15 +84,15 @@ export default function HomePage() {
         >
           <Link
             to="/register"
-            className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-300"
+            className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-300 hover:from-blue-700 hover:to-purple-700"
           >
             Start Learning Free
           </Link>
           <Link
-            to="/login"
-            className="px-8 py-4 bg-white/80 backdrop-blur-sm text-blue-600 border-2 border-blue-600 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-200"
+            to="/courses"
+            className="px-8 py-4 bg-white/80 backdrop-blur-sm text-blue-600 border-2 border-blue-600 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-200 hover:border-blue-700 hover:text-blue-700"
           >
-            Sign In
+            Browse Courses
           </Link>
         </motion.div>
 
@@ -102,30 +107,41 @@ export default function HomePage() {
             {
               icon: "📚",
               title: "Interactive Courses",
-              description: "Engage with dynamic content designed for all learning styles"
+              description: "Engage with dynamic content designed for all learning styles",
+              link: "/courses"
             },
             {
               icon: "🎥",
               title: "Video Learning",
-              description: "High-quality video content with progress tracking"
+              description: "High-quality video content with progress tracking",
+              link: "/videos"
             },
             {
               icon: "🧠",
               title: "Smart Quizzes",
-              description: "Adaptive assessments that grow with your knowledge"
+              description: "Adaptive assessments that grow with your knowledge",
+              link: "/quizzes"
             }
           ].map((feature, index) => (
-            <motion.div
+            <Link
               key={index}
-              className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.1 + index * 0.1, duration: 0.6 }}
+              to={feature.link}
+              className="group"
             >
-              <div className="text-4xl mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
-            </motion.div>
+              <motion.div
+                className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1 group-hover:bg-white/80"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.1 + index * 0.1, duration: 0.6 }}
+              >
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-200">{feature.icon}</div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors duration-200">{feature.title}</h3>
+                <p className="text-gray-600 group-hover:text-gray-700 transition-colors duration-200">{feature.description}</p>
+                <div className="mt-4 text-blue-600 font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  Explore →
+                </div>
+              </motion.div>
+            </Link>
           ))}
         </motion.div>
       </div>

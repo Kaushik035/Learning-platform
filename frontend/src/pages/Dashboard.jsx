@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import useClickLogger from "../components/ClickLogger";
 import { logPageView } from "../components/ClickLogger";
@@ -93,7 +94,7 @@ export default function Dashboard() {
             <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-bold text-gray-800">Recent Courses</h2>
-                <button className="text-blue-600 hover:text-blue-700 font-medium">View All</button>
+                <Link to="/courses" className="text-blue-600 hover:text-blue-700 font-medium">View All</Link>
               </div>
               
               <div className="space-y-4">
@@ -156,9 +157,9 @@ export default function Dashboard() {
                 ))}
               </div>
 
-              <button className="w-full mt-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-medium hover:shadow-lg transition-all duration-200">
+              <Link to="/courses" className="w-full mt-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-medium hover:shadow-lg transition-all duration-200 text-center block">
                 Start Learning
-              </button>
+              </Link>
             </div>
           </motion.div>
         </div>
@@ -179,17 +180,20 @@ export default function Dashboard() {
                 { title: "Watch Videos", icon: "🎥", color: "from-purple-500 to-purple-600", path: "/videos" },
                 { title: "Take Quiz", icon: "🧠", color: "from-green-500 to-green-600", path: "/quizzes" }
               ].map((action, index) => (
-                <motion.button
+                <Link
                   key={index}
-                  className="p-6 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl border border-gray-200 hover:shadow-md transition-all duration-200 text-left"
-                  whileHover={{ y: -2, scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  to={action.path}
+                  className="block p-6 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl border border-gray-200 hover:shadow-md transition-all duration-200 text-left hover:-translate-y-1"
                 >
-                  <div className={`w-12 h-12 bg-gradient-to-r ${action.color} rounded-xl flex items-center justify-center text-white text-2xl mb-4`}>
+                  <motion.div
+                    className={`w-12 h-12 bg-gradient-to-r ${action.color} rounded-xl flex items-center justify-center text-white text-2xl mb-4`}
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     {action.icon}
-                  </div>
+                  </motion.div>
                   <h3 className="font-semibold text-gray-800">{action.title}</h3>
-                </motion.button>
+                </Link>
               ))}
             </div>
           </div>
