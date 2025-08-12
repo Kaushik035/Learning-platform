@@ -62,7 +62,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173", # local frontend
-    "https://<your-vercel-frontend-domain>", # production frontend
+    "https://learning-platform-drab-one.vercel.app" # production frontend
 ]
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
