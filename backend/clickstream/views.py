@@ -49,8 +49,7 @@ class ClickstreamLogView(APIView):
             ip_address = get_client_ip(request)
             data['ip_address'] = ip_address
             
-            # Set the authenticated user - this is crucial for user tracking
-            data['user'] = request.user.id
+            # Do not set the user in data; it will be set during serializer.save()
             
             # Log the user and IP address being used for debugging
             logger.info(f"Logging clickstream for user: {request.user.username} (ID: {request.user.id}) with IP: {ip_address}")
@@ -58,8 +57,8 @@ class ClickstreamLogView(APIView):
             
             serializer = ClickstreamSerializer(data=data)
             if serializer.is_valid():
-                # Save the clickstream record
-                clickstream_record = serializer.save()
+                # Save the clickstream record, setting user from the request
+                clickstream_record = serializer.save(user=request.user)
                 
                 # Log successful creation with user info
                 logger.info(f"Clickstream record created successfully - ID: {clickstream_record.id}, User: {clickstream_record.user.username if clickstream_record.user else 'None'}")
