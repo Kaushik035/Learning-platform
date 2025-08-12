@@ -9,6 +9,7 @@ export const logEvent = async (eventName, eventContext, component, description, 
   try {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     await apiClient.post("/clickstream/log/", {
+      time: new Date().toISOString(),
       event_context: eventContext,
       component: component,
       event_name: eventName,
